@@ -20,9 +20,35 @@ font-family:-apple-system,sans-serif;
 
 margin:0;
 
-background:linear-gradient(180deg,#007AFF,#00c6ff);
+background:#007AFF;
 
 color:#333;
+
+overflow-x:hidden;
+
+}
+
+
+
+/* SFONDO LOGO */
+
+.bg-logo{
+
+position:fixed;
+
+top:50%;
+
+left:50%;
+
+transform:translate(-50%,-50%);
+
+width:80%;
+
+opacity:0.08; /* trasparenza */
+
+z-index:0;
+
+pointer-events:none;
 
 }
 
@@ -38,6 +64,10 @@ color:white;
 
 text-align:center;
 
+position:relative;
+
+z-index:1;
+
 }
 
 
@@ -52,17 +82,23 @@ font-size:24px;
 
 
 
+/* SEARCH */
+
 .search-box{
 
 background:white;
 
-margin: -20px 15px 10px;
+margin:-20px 15px 10px;
 
 padding:10px;
 
 border-radius:20px;
 
 box-shadow:0 10px 20px rgba(0,0,0,0.15);
+
+position:relative;
+
+z-index:1;
 
 }
 
@@ -92,6 +128,10 @@ border-radius:15px;
 
 padding:10px;
 
+position:relative;
+
+z-index:1;
+
 }
 
 
@@ -103,6 +143,10 @@ color:white;
 margin:10px;
 
 font-size:14px;
+
+position:relative;
+
+z-index:1;
 
 }
 
@@ -199,6 +243,12 @@ margin-top:40px;
 
 
 <body>
+
+
+
+<!-- LOGO SFONDO -->
+
+<img src="logo.png" class="bg-logo">
 
 
 
