@@ -18,21 +18,51 @@ body{
 
 font-family:-apple-system,sans-serif;
 
-background:#f2f2f7;
-
 margin:0;
 
-padding:15px;
+background:linear-gradient(180deg,#007AFF,#00c6ff);
+
+color:#333;
 
 }
 
 
 
-h1{
+/* HEADER */
 
-font-size:22px;
+.header{
 
-margin-bottom:10px;
+padding:20px;
+
+color:white;
+
+text-align:center;
+
+}
+
+
+
+.header h1{
+
+margin:0;
+
+font-size:24px;
+
+}
+
+
+
+.search-box{
+
+background:white;
+
+margin: -20px 15px 10px;
+
+padding:10px;
+
+border-radius:20px;
+
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
 
 }
 
@@ -44,15 +74,23 @@ width:100%;
 
 padding:15px;
 
-border-radius:14px;
-
 border:none;
+
+outline:none;
 
 font-size:18px;
 
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+border-radius:15px;
 
-margin-bottom:10px;
+}
+
+
+
+/* CONTENUTO */
+
+.container{
+
+padding:10px;
 
 }
 
@@ -60,15 +98,17 @@ margin-bottom:10px;
 
 .info{
 
+color:white;
+
+margin:10px;
+
 font-size:14px;
-
-color:#666;
-
-margin-bottom:10px;
 
 }
 
 
+
+/* CARD */
 
 .box{
 
@@ -76,11 +116,21 @@ background:white;
 
 padding:15px;
 
-border-radius:16px;
+border-radius:18px;
 
-margin-bottom:10px;
+margin-bottom:12px;
 
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
+box-shadow:0 6px 15px rgba(0,0,0,0.1);
+
+transition:transform 0.1s;
+
+}
+
+
+
+.box:active{
+
+transform:scale(0.97);
 
 }
 
@@ -90,7 +140,7 @@ box-shadow:0 4px 10px rgba(0,0,0,0.08);
 
 font-size:12px;
 
-color:#999;
+color:#888;
 
 }
 
@@ -100,7 +150,7 @@ color:#999;
 
 font-weight:600;
 
-margin:5px 0;
+margin:6px 0;
 
 }
 
@@ -120,7 +170,11 @@ font-weight:bold;
 
 .highlight{
 
-background:yellow;
+background:#ffe066;
+
+border-radius:4px;
+
+padding:2px;
 
 }
 
@@ -130,9 +184,9 @@ background:yellow;
 
 text-align:center;
 
-color:#999;
+color:white;
 
-margin-top:30px;
+margin-top:40px;
 
 }
 
@@ -148,11 +202,19 @@ margin-top:30px;
 
 
 
-<h1>🔍 Listino Prezzi</h1>
+<div class="header">
+
+<h1>🔎 Trova Prezzi</h1>
+
+</div>
 
 
+
+<div class="search-box">
 
 <input type="text" id="campo" placeholder="Cerca prodotto..." oninput="cerca()">
+
+</div>
 
 
 
@@ -160,7 +222,7 @@ margin-top:30px;
 
 
 
-<div id="lista"></div>
+<div class="container" id="lista"></div>
 
 
 
@@ -2212,4 +2274,3 @@ lista.innerHTML += `
 </body>
 
 </html>
-
