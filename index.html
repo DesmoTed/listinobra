@@ -50,9 +50,13 @@ opacity:0.99; /* trasparenza */
 z-index:0;
 
 pointer-events:none;
+animation: ruotaLogo 20s linear infinite;
 
 }
-
+@keyframes ruotaLogo {
+from { transform: translate(-50%,-50%) rotate(0deg); }
+to { transform: translate(-50%,-50%) rotate(360deg); }
+}
 
 
 /* HEADER */
