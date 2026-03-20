@@ -1,24 +1,172 @@
 <!DOCTYPE html>
+
 <html lang="it">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ricerca Prezzi</title>
+
+<title>Listino Prezzi</title>
+
+
+
 <style>
-body{font-family:-apple-system,sans-serif;padding:15px;background:#f2f2f7;margin:0;}
-input{width:100%;padding:15px;border-radius:12px;border:2px solid #007AFF;font-size:18px;}
-.box{background:white;padding:15px;border-radius:12px;margin:8px 0;}
-.cod{color:#888;font-size:12px;}
-.nome{font-weight:600;}
-.prezzo{color:#34c759;font-weight:bold;}
+
+body{
+
+font-family:-apple-system,sans-serif;
+
+background:#f2f2f7;
+
+margin:0;
+
+padding:15px;
+
+}
+
+
+
+h1{
+
+font-size:22px;
+
+margin-bottom:10px;
+
+}
+
+
+
+input{
+
+width:100%;
+
+padding:15px;
+
+border-radius:14px;
+
+border:none;
+
+font-size:18px;
+
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+margin-bottom:10px;
+
+}
+
+
+
+.info{
+
+font-size:14px;
+
+color:#666;
+
+margin-bottom:10px;
+
+}
+
+
+
+.box{
+
+background:white;
+
+padding:15px;
+
+border-radius:16px;
+
+margin-bottom:10px;
+
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+
+}
+
+
+
+.cod{
+
+font-size:12px;
+
+color:#999;
+
+}
+
+
+
+.nome{
+
+font-weight:600;
+
+margin:5px 0;
+
+}
+
+
+
+.prezzo{
+
+color:#007AFF;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+
+
+.highlight{
+
+background:yellow;
+
+}
+
+
+
+.vuoto{
+
+text-align:center;
+
+color:#999;
+
+margin-top:30px;
+
+}
+
+
+
 </style>
+
 </head>
+
+
+
 <body>
 
-<input type="text" id="campo" placeholder="Cerca..." oninput="cerca()">
+
+
+<h1>🔍 Listino Prezzi</h1>
+
+
+
+<input type="text" id="campo" placeholder="Cerca prodotto..." oninput="cerca()">
+
+
+
+<div class="info" id="info"></div>
+
+
+
 <div id="lista"></div>
 
+
+
 <script>
+
+
 
 const datiTesto = `
 4D112;ACCENDIFUOCO PZ 48;1.00
@@ -1947,27 +2095,121 @@ TRASPORTO;TRASPORTO;5.00
 8H027;VELINA 80 GR. FSC;3.25
 `;
 
-const prodotti=datiTesto.trim().split('\n').map(r=>{
+
+
+const prodotti = datiTesto.trim().split('\n').map(r=>{
+
 const p=r.split(';');
-return {c:p[0],n:p[1],pr:p[2]};
+
+return {
+
+c:(p[0]||''),
+
+n:(p[1]||''),
+
+pr:(p[2]||'')
+
+};
+
 });
 
+
+
+function evidenzia(testo, ricerca){
+
+if(!ricerca) return testo;
+
+let reg = new RegExp(`(${ricerca})`, "gi");
+
+return testo.replace(reg, '<span class="highlight">$1</span>');
+
+}
+
+
+
 function cerca(){
-let val=document.getElementById('campo').value.toLowerCase();
-let out='';
-prodotti.forEach(p=>{
-if(p.c.toLowerCase().includes(val)||p.n.toLowerCase().includes(val)){
-out+=`<div class="box">
+
+
+
+let val = document.getElementById('campo').value.toLowerCase();
+
+let lista = document.getElementById('lista');
+
+let info = document.getElementById('info');
+
+
+
+lista.innerHTML="";
+
+
+
+if(val.length<2){
+
+info.innerHTML="";
+
+return;
+
+}
+
+
+
+let risultati = prodotti.filter(p =>
+
+p.c.toLowerCase().includes(val) ||
+
+p.n.toLowerCase().includes(val)
+
+);
+
+
+
+info.innerHTML = risultati.length + " risultati";
+
+
+
+if(risultati.length===0){
+
+lista.innerHTML = `<div class="vuoto">Nessun risultato</div>`;
+
+return;
+
+}
+
+
+
+risultati.slice(0,100).forEach(p=>{
+
+
+
+lista.innerHTML += `
+
+<div class="box">
+
 <div class="cod">${p.c}</div>
-<div class="nome">${p.n}</div>
+
+<div class="nome">${evidenzia(p.n,val)}</div>
+
 <div class="prezzo">€ ${p.pr}</div>
-</div>`;
-}
+
+</div>
+
+`;
+
+
+
 });
-document.getElementById('lista').innerHTML=out;
+
+
+
 }
+
+
 
 </script>
 
+
+
 </body>
+
 </html>
+
